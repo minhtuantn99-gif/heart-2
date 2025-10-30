@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỷ Niệm Của Chúng Ta</title>
 
+    <style>
+        /* CSS để tạo kiểu và hiệu ứng */
+
+        /* 1. Thiết lập cơ bản cho toàn trang */
+        body {
+            display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+            flex-direction: column; /* Xếp chồng các phần tử theo chiều dọc */
+            justify-content: center; /* Căn giữa theo chiều dọc */
+            align-items: center; /* Căn giữa theo chiều ngang */
+            min-height: 100vh; /* Chiều cao tối thiểu 100% viewport */
+            margin: 0; /* Bỏ margin mặc định của body */
+            background: linear-gradient(to right top, #a1c4fd, #c2e9fb); /* Gradient màu nền */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333; /* Màu chữ mặc định */
+            overflow: hidden; /* Ẩn thanh cuộn nếu có hiệu ứng tràn ra ngoài */
+        }
+
+        /* 2. Tiêu đề chính */
+        h1 {
+            color: #fff; /* Màu chữ trắng */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Đổ bóng chữ */
+            margin-bottom: 30px;
+            font-size: 2.5em; /* Kích thước chữ lớn */
+            animation: textFadeIn 2s ease-out; /* Hiệu ứng xuất hiện cho chữ */
+        }
+
+        /* 3. Vùng chứa ảnh để thêm hiệu ứng */
+        .image-container {
+            position: relative; /* Quan trọng để định vị các hiệu ứng con */
+            width: 450px; /* Chiều rộng của vùng chứa ảnh */
+            max-width: 90%; /* Tối đa 90% chiều rộng màn hình */
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* Bóng đổ cho khung ảnh */
+            overflow: hidden; /* Cắt bỏ phần ảnh tràn ra ngoài bo tròn */
+            cursor: pointer; /* Thay đổi con trỏ thành bàn tay khi di chuột */
+
+            /* HIỆU ỨNG ĐỘNG 1: XUẤT HIỆN KHI TẢI TRANG */
+            animation: containerPopIn 1.5s ease-out forwards; /* Chạy animation 1.5s */
+        }
+
+        /* 4. Định kiểu cho chính bức ảnh */
+        .image-container img {
+            display: block; /* Loại bỏ khoảng trắng dưới ảnh */
+            width: 100%; /* Ảnh lấp đầy vùng chứa */
+            height: auto;
+            border-radius: 20px; /* Bo tròn góc ảnh */
+            transition: transform 0.5s ease; /* Hiệu ứng chuyển động mượt mà khi tương tác */
+        }
+
+        /* 5. Hiệu ứng khi di chuột vào vùng chứa ảnh */
+        .image-container:hover img {
+            transform: scale(1.08); /* Phóng to ảnh nhẹ nhàng */
+        }
+
+        /* 6. Hiệu ứng overlay (lớp phủ) khi di chuột */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Lớp phủ đen trong suốt */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            opacity: 0; /* Mặc định ẩn */
+            transition: opacity 0.5s ease; /* Hiệu ứng chuyển đổi mượt mà */
+        }
+
+        .image-container:hover .image-overlay {
+            opacity: 1; /* Hiện ra khi di chuột */
+        }
+
+        /* 7. Hiệu ứng lấp lánh (sparkle) khi di chuột */
+        .sparkle {
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(255,255,255,0.7) 10%, transparent 70%);
+            opacity: 0;
+            transform: scale(0);
+            pointer-events: none; /* Không chặn sự kiện chuột */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .image-container:hover .sparkle {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* 8. Chú thích nhỏ bên dưới ảnh */
+        .caption {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #666;
+            animation: textFadeIn 2.5s ease-out 0.5s forwards; /* Trễ 0.5s */
+            opacity: 0; /* Mặc định ẩn */
+        }
+        .caption span {
+            font-weight: bold;
+            color: #444;
+        }
+
+        /* Định nghĩa keyframes cho animations */
+
+        /* Animation cho tiêu đề chữ */
+        @keyframes textFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation cho vùng chứa ảnh xuất hiện */
+        @keyframes containerPopIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.02) translateY(-5px); /* Hơi nảy lên 1 chút */
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Kỷ Niệm Tươi Đẹp Của Chúng Ta</h1>
+
+    <div class="image-container">
+        <img src="images/NM.jpg" alt="Một khoảnh khắc ý nghĩa">
+        
+        <div class="image-overlay">
+            Khoảnh Khắc Bình Yên
+        </div>
+
+        <div class="sparkle"></div>
+    </div>
+
+    <p class="caption">
+        "Bình yên là khi có ai đó <span>ngả đầu vào vai</span> mình..."
+    </p>
+
+</body>
+</html>
